@@ -2,15 +2,13 @@ import sqlite3 as sql
 
 
 
-def conn(db):
+def conn(database):
 
     try:
         
-        conn = sql.connect(db)
+        conn = sql.connect(database)
         return conn
     
     
     except Exception as e: 
-
-        print(e)
-        return None
+        return e
