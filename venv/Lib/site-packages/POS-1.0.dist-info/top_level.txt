@@ -1,3 +1,11 @@
 authentication
+clients
 database
+integration
+inventory
+payments
+peripherals
+reports
+sales
+security
 users

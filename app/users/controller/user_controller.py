@@ -3,6 +3,7 @@ from authentication.password import Password as p
 
 
 class User:
+    DB = "./database/users.db"
     def __init__(self, name, username, password, permission_level):
 
         '''
@@ -44,7 +45,7 @@ class User:
         '''
         try:
             pw = p.hash(password)
-            conn = c("./database/users.db")
+            conn = c(User.DB)
             cursor = conn.cursor()
 
             query = ''' INSERT INTO users (name, username, password, salt, perm_level)
@@ -71,7 +72,7 @@ class User:
          @return None if no user is found or an exception that was raised while trying to read the user. Otherwise a dictionary
         '''
         try:
-            conn = c("./database/users.db")
+            conn = c(User.DB)
             cursor = conn.cursor()
 
             # Return user_id if user_id is not None
@@ -126,7 +127,7 @@ class User:
         # Check if the user is in the database.
         if user_id is not None:
             try:
-                conn = c("./database/users.db")
+                conn = c(User.DB)
                 cursor = conn.cursor()
 
                 # Update the name of the user
@@ -180,7 +181,7 @@ class User:
             query = ''' DELETE FROM users WHERE id=(?)'''
 
             try:
-                conn = c("./database/users.db")
+                conn = c(User.DB)
                 cursor = conn.cursor()
 
                 cursor.execute(query, (user_id,))
@@ -199,7 +200,7 @@ class User:
             query = ''' DELETE FROM users WHERE username=(?)'''
 
             try:
-                conn = c("./database/users.db")
+                conn = c(User.DB)
                 cursor = conn.cursor()
 
                 cursor.execute(query, (username,))
@@ -210,3 +211,4 @@ class User:
 
             finally:
                 conn.close()
+

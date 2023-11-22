@@ -40,14 +40,23 @@ class Password:
 
         if Password.req_verify(password):
             try:
+                
                 salt = bc.gensalt()
                 hashed_pw = bc.hashpw(password.encode(), salt)
-
 
                 return hashed_pw.decode(), salt.decode()
             
 
             except Exception as e:
-                print(e)
                 return None
         
+    def hash_with_salt(password, salt_req):
+        if Password.req_verify(password):
+            try:
+                hashed_pw = bc.hashpw(password.encode(), salt_req.encode())
+
+                return hashed_pw.decode()
+            
+            except Exception as e:
+                return e
+

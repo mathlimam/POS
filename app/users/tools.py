@@ -1,4 +1,7 @@
-from controllers.user_controller import User as uc
+from .controller.user_controller import User as uc
+
+
+
 from database.connection import conn as c
 
 
@@ -40,7 +43,7 @@ class Tools:
     @staticmethod
     def create(name, username, password, perm_level):
         '''
-         Create a UC account if it doesn't exist. This is a wrapper around uc. create that handles exceptions that occur during creation
+         Create a USER account if it doesn't exist. This is a wrapper around user controller. create that handles exceptions that occur during creation
          
          @param name - The name of the account
          @param username - The username to use for the account ( required )
@@ -53,6 +56,7 @@ class Tools:
         if Tools.exists(username=username) is None:
             try:
                 uc.create(name, username, password, perm_level)
+            
             except Exception as e:
                 return e
 
@@ -106,3 +110,6 @@ class Tools:
                 uc.delete(user_id=user_id, username=username)
         except Exception as e:
             return e
+
+
+print(Tools.create("matheus", "Lima", "alicein99", "1"))
